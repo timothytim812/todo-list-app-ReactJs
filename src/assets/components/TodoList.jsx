@@ -1,21 +1,17 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const TodoList = () => {
   const [todos, setTodos] = useState([]);
   const [newTodo, setNewTodo] = useState("");
-  const [AddMesssge,setAddMessage] = useState(false);
 
   const handleInput = (e) => {
     setNewTodo(e.target.value);
-    setAddMessage(false); 
   };
 
   const handleAddTodo = () => {
     if (newTodo.trim() !== "") {
       setTodos((t) => [...t, newTodo]);
       setNewTodo("");
-    } else {
-      setAddMessage(true); 
     }
   };
 
@@ -51,15 +47,15 @@ const TodoList = () => {
 
   return (
     <>
-      <div className=" mt-28 flex flex-col items-center mx-auto">
+      <div className=" mt-28 flex flex-col items-center mx-auto w-5/12">
         <div>
           <h1 className=" text-red-600 text-7xl font-bold ">
             Todo List <span className=" text-gray-600 text-7xl ">ReactJS</span>
           </h1>
 
-          <div className="flex items-center mt-20 flex-auto">
+          <div className="flex items-center mt-20">
             <input
-              className=" bg-neutral-300 w-full h-6 text-left px-5 py-6 text-md font-medium rounded-l-2xl border-4 border-slate-600 focus:outline-none"
+              className=" bg-neutral-300 w-full h-6 px-5 py-6 text-md font-medium rounded-l-2xl border-4 border-slate-600 focus:outline-none transition-all placeholder-font-semibold placeholder-gray-600"
               type="text"
               placeholder="Enter the Todo"
               value={newTodo}
@@ -67,7 +63,7 @@ const TodoList = () => {
             />
 
             <button
-              className=" text-neutral-300 flex-shrink-0 bg-slate-600 hover:bg-slate-800 h-14 text-md font-medium rounded-r-2xl px-5 py-2.5 transition-all"
+              className=" text-neutral-300 bg-slate-600 hover:bg-slate-800 h-14 text-md font-medium rounded-r-2xl px-5 py-2.5 transition-all"
               onClick={handleAddTodo}
             >
               Add Todo
@@ -78,7 +74,7 @@ const TodoList = () => {
             List
           </h1>
 
-          <ol className="flex flex-1 flex-col mt-5 ">
+          <ol className="flex flex-1 flex-col mt-5">
             {todos.map((todo, index) => (
               <>
                 <div className="bg-neutral-300 flex flex-row justify-between mb-5 rounded-md min-w-96">
