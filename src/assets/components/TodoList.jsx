@@ -17,6 +17,12 @@ const TodoList = () => {
     }
   };
 
+  const handleKey =(e) => {
+    if(e.key === 'Enter'){
+      handleAddTodo();
+    }
+  }
+
   const handleRemoveTodo = (index) => {
     setTodos((t) => t.filter((_, i) => i !== index));
 
@@ -65,6 +71,7 @@ const TodoList = () => {
               type="text"
               placeholder="Enter the Todo"
               value={newTodo}
+              onKeyDown={handleKey}
               onChange={handleInput}
             />
 
