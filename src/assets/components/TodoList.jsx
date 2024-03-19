@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 const TodoList = () => {
   const [todos, setTodos] = useState([]);
   const [newTodo, setNewTodo] = useState("");
+  const [NoTodosMessage, setNoTodosMessage] = useState(true);
 
   const handleInput = (e) => {
     setNewTodo(e.target.value);
@@ -12,11 +13,16 @@ const TodoList = () => {
     if (newTodo.trim() !== "") {
       setTodos((t) => [...t, newTodo]);
       setNewTodo("");
+      setNoTodosMessage(false);
     }
   };
 
   const handleRemoveTodo = (index) => {
     setTodos((t) => t.filter((_, i) => i !== index));
+
+    if(index === 0){
+      setNoTodosMessage(true);
+    }
   };
 
   const handlePushUp = (index) => {
@@ -63,7 +69,7 @@ const TodoList = () => {
             />
 
             <button
-              className=" text-neutral-300 bg-slate-600 hover:bg-slate-800 h-14 text-md font-medium rounded-r-2xl px-5 py-2.5 transition-all"
+              className=" text-neutral-300 bg-slate-600 hover:bg-slate-800 h-14 font-medium rounded-r-2xl px-5 py-2.5 transition-all text-sm"
               onClick={handleAddTodo}
             >
               Add Todo
@@ -73,6 +79,8 @@ const TodoList = () => {
           <h1 className="text-gray-400 my-10 font-bold text-4xl items-start">
             List
           </h1>
+
+          {NoTodosMessage && <p className=" text-zinc-400 text-xl">" No todos yet! 👀"</p>}
 
           <ol className="flex flex-1 flex-col mt-5">
             {todos.map((todo, index) => (
